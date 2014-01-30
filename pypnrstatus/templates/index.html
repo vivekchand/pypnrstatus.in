@@ -1,19 +1,27 @@
-<form action="/" method="POST">{% csrf_token %}
-    Enter PNR No: 
-    <input type="text" name="pnrno"><br>
-    Notify to my
-    <select name='notification_type'>
-        <option value="email" selected=True>Email</option>
-        <option value="phone">Phone</option>
-    </select>
-    <input type="email_or_phone" name="email_or_phone"><br>
-    Notify me every 
-    <input type="text" name="notifyValue">
-    <select name='notification_frequency'>
-        <option value="minutes">Minutes</option>
-        <option value="hours" selected=True>Hours</option>
-        <option value="days">Days</option>
-    </select><br>
-</select>
-<input type="submit" value="Submit">
-</form>
+<html>
+<head>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <form action="/" method="POST">{% csrf_token %}
+        Enter PNR No:
+        <input type="text" name="pnrno"><br>
+        Notify to my
+        <select name='notification_type'>
+            <option value="email" selected=True>Email</option>
+            <option value="phone">Phone</option>
+        </select>
+        <input type="email_or_phone" name="email_or_phone"><br>
+        Notify me every
+        <input type="text" name="notifyValue">
+        <select name='notification_frequency'>
+            <option value="minutes">Minutes</option>
+            <option value="hours" selected=True>Hours</option>
+            <option value="days">Days</option>
+        </select><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
