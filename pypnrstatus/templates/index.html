@@ -1,27 +1,38 @@
 <html>
 <head>
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
 </head>
 <body>
-    <form action="/" method="POST">{% csrf_token %}
-        Enter PNR No:
-        <input type="text" name="pnrno"><br>
-        Notify to my
-        <select name='notification_type'>
-            <option value="email" selected=True>Email</option>
-            <option value="phone">Phone</option>
-        </select>
-        <input type="email_or_phone" name="email_or_phone"><br>
-        Notify me every
-        <input type="text" name="notifyValue">
-        <select name='notification_frequency'>
-            <option value="minutes">Minutes</option>
-            <option value="hours" selected=True>Hours</option>
-            <option value="days">Days</option>
-        </select><br>
-        <input type="submit" value="Submit">
-    </form>
+   <div class="container">
+
+      <form class="form-signin" role="form">
+        <div class="form-group">
+            <h3>Enter PNR No.</h3>
+            <input type="text" class="form-control" name="pnrno" placeholder="PNR Number" required autofocus>
+        </div>
+        <div class="form-group">
+            <h3>Notify to my</h3>
+            <select name='notification_type' class="form-control">
+                <option value="email" selected=True>Email</option>
+                <option value="phone">Phone</option>
+            </select>
+            <input type="text" class="form-control" name="email_or_phone" placeholder="Email or Phone" required>
+        </div>
+        <div class="form-group">
+            <h3>Notify me every</h3>
+            <input type="text" class="form-control" value="3" name="notifyValue" placeholder="Enter a number" required>
+            <select name='notification_frequency' class="form-control">
+                <option value="minutes">Minutes</option>
+                <option value="hours" selected=True>Hours</option>
+                <option value="days">Days</option>
+            </select>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </form>
+
+    </div> <!-- /container -->
 </body>
 </html>
