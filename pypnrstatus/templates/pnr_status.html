@@ -1,0 +1,34 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+</head>
+<body>
+   <div class="container">
+     <div class="jumbotron">
+      <h3>PNR {{pnr_no}}</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Current Status</th>
+            <th>Seat Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for passenger in passengers %}
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{ passenger.status }}</td>
+            <td>{{ passenger.seat_number }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+     </div>
+    </div><!-- /example -->
+</body>
+</html>

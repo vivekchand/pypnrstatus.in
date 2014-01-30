@@ -8,7 +8,7 @@
 <body>
    <div class="container">
 
-      <form class="form-signin" role="form">
+      <form class="form-signin" role="form" action="/" method="POST">{% csrf_token %}
         <div class="form-group">
             <h3>Enter PNR No.</h3>
             <input type="text" class="form-control" name="pnrno" placeholder="PNR Number" required autofocus>
