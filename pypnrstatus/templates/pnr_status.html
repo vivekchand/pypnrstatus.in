@@ -10,6 +10,9 @@
 <body>
    <div class="container">
      <div class="jumbotron">
+      {% if error %}
+        <h3>{{error}}</h3>
+      {% else %}
       <h3>PNR {{pnr_no}}</h3>
       <table class="table table-striped">
         <thead>
@@ -29,6 +32,7 @@
           {% endfor %}
         </tbody>
       </table>
+      {% endif %}
      </div>
     </div><!-- /example -->
 </body>

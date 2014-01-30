@@ -17,7 +17,7 @@ def get_and_schedule_pnr_notification(pnr_notify):
     data = resp['data']
     
     if data == {} and status == 'OK':
-        return {'error': 'Something went wrong real bad! Try again Later :)'}
+        return {'error': 'Something went wrong real bad! \nTry again later :)'}
     
     if status == "INVALID":
         return {'error': 'Invalid PNR Number!'}
