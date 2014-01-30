@@ -1,3 +1,7 @@
+from django.conf import settings
+if not settings.configured:
+    settings.configure()
+
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from pypnrstatus.models import PNRNotification
