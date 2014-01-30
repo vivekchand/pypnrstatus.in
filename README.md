@@ -3,7 +3,7 @@ pypnrstatus.in
 
 Web App of py-pnr-status ( https://github.com/vivekchand/py-pnr-status )
 
-![alt tag](https://github.com/vivekchand/pypnrstatus.in/blob/master/pypnrstatus.png)
+![alt tag](https://raw.github.com/vivekchand/pypnrstatus.in/master/pypnrstatus.png)
 
 ToDo:
 -----
