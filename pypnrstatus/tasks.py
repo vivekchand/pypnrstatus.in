@@ -1,6 +1,5 @@
 import requests
-from pypnrstatus.pnr_utils import check_if_passengers_cnf
-from pypnrstatus.views import q
+from pypnrstatus.pnr_utils import *
 
 def schedule_pnr_notification(pnr_notify):
     pnr = pnr_notify.prn_no
@@ -17,9 +16,11 @@ def schedule_pnr_notification(pnr_notify):
     passengers = data['passenger']
 
     if pnr_notify.notification_type == 'email':
+        pass
         # handle emailing 
 
     elif pnr_notify.notification_type == 'phone':
+        pass
         # handle sending sms
 
 
@@ -27,6 +28,7 @@ def schedule_pnr_notification(pnr_notify):
         # done no more work :)
         pass 
     else:
+        from pypnrstatus.views import q
         # Compute when to reschedule
         if pnr_notify.notification_frequency == 'minutes':
             q.enqueue()
