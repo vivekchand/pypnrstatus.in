@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', 'pypnrstatus.views.index', name='index'),
+    url(r'^pnr_status/', 'pypnrstatus.views.pnr_status', name='pnr_status'),
     url(r'^admin/', include(admin.site.urls)),
 )

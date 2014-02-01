@@ -13,15 +13,15 @@ def check_if_passengers_cnf(passengers):
     return True
 
 
-def caluclate_next_schedule_time(timenow, notification_frequency, notification_frequency_value):
+def caluclate_timedelta(notification_frequency, notification_frequency_value):
     notification_frequency_value = int(notification_frequency_value)
     if notification_frequency == 'minutes':
-        timenow = timenow + datetime.timedelta(minutes=notification_frequency_value)
+        timedelta = datetime.timedelta(minutes=notification_frequency_value)
     elif notification_frequency == 'hours':
-        timenow = timenow + datetime.timedelta(hours=notification_frequency_value)
+        timedelta = datetime.timedelta(hours=notification_frequency_value)
     elif notification_frequency == 'days':
-        timenow = timenow + datetime.timedelta(days=notification_frequency_value)
-    return timenow
+        timedelta = datetime.timedelta(days=notification_frequency_value)
+    return timedelta
 
 def get_and_schedule_pnr_notification(pnr_notify):
     pnr_no = pnr_notify.pnr_no
@@ -32,15 +32,17 @@ def get_and_schedule_pnr_notification(pnr_notify):
     data = resp['data']
 
     if data == {} and status == 'OK':
+        pnr_notify.delete()
         return {'error': 'Something went wrong real bad! \nTry again later :)'}
 
     if status == "INVALID":
+        pnr_notify.delete()
         return {'error': 'Invalid PNR Number!'}
 
     passengers = data['passenger']
     if data['chart_prepared'] or check_if_passengers_cnf(passengers):
         # The ticket is confirmed or chart prepared
-        pass
+        pnr_notify.delete()
     else:
         from pypnrstatus.tasks import schedule_pnr_notification
         # Put the pnr_notify into the que if not confirmed yet
