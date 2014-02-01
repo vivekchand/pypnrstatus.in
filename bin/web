@@ -1,2 +1,2 @@
 gunicorn pypnrstatus.wsgi &
-rqworker
+python worker.py

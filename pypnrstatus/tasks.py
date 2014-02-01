@@ -45,7 +45,7 @@ def schedule_pnr_notification(pnr_notify):
     else:
         pass
         '''
-        from pypnrstatus.views import q
+        from pypnrstatus.pnr_utils import q
         # Compute when to reschedule
         pnr_notify.next_schedule_time = pnr_notify.next_schedule_time + caluclate_timedelta(
             pnr_notify.notification_frequency,

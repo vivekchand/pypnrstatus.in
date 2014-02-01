@@ -1,10 +1,11 @@
 import requests
 import json
 
-from redis import Redis
-from rq import Queue
-q = Queue(connection=Redis())
 import datetime
+
+from rq import Queue
+from worker import conn
+q = Queue(connection=conn)
 
 def check_if_passengers_cnf(passengers):
     for passenger in passengers:
