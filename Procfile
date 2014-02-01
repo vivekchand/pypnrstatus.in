@@ -1,1 +1,1 @@
-web: gunicorn pypnrstatus.wsgi
+web: bin/web
