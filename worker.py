@@ -33,4 +33,4 @@ while True:
     for pnr_notification in pnr_notifications:
         schedule_pnr_notification(pnr_notification)
 
-    time.sleep(5*60)
+    #time.sleep(5*60)

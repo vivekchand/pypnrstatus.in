@@ -35,13 +35,13 @@ def pnr_status(request):
             pnr_notify.next_schedule_time = next_schedule_time
             pnr_notify.save()
             print 'saving ...'
-            print pnr_notify
+            print pnr_notify.id
         except PNRNotification.DoesNotExist:
             print 'creating'
             pnr_notify = PNRNotification.objects.create( pnr_no=pnr_no, notification_type=notification_type,
                 notification_type_value=notification_type_value, notification_frequency=notification_frequency,
                 notification_frequency_value=notification_frequency_value, next_schedule_time=next_schedule_time )
-            print pnr_notify
+            print pnr_notify.id
 
         pnr_status = get_and_schedule_pnr_notification(pnr_notify)
         return render(request, 'pnr_status.html', pnr_status)
