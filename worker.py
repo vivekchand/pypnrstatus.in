@@ -3,12 +3,12 @@ from django.conf import settings
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+if not settings.configured:
+    settings.configure()
 import dj_database_url
 if dj_database_url.config():
     settings.DATABASES['default'] =  dj_database_url.config()
 
-if not settings.configured:
-    settings.configure()
 
 from pypnrstatus.tasks import *
 from pypnrstatus.models import *
