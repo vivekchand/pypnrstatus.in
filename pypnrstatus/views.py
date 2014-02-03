@@ -27,6 +27,7 @@ def pnr_status(request):
         pnr_no = pnr_no[:10]
         try:
             print 'trying ...'
+            print PNRNotification.objects.all()
             pnr_notify = PNRNotification.objects.get(pnr_no=pnr_no)
             pnr_notify.notification_type = notification_type
             pnr_notify.notification_type_value = notification_type_value
