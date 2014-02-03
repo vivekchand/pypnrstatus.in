@@ -3,10 +3,6 @@ import json
 
 import datetime
 
-from rq import Queue
-from worker import conn
-q = Queue(connection=conn)
-
 def check_if_passengers_cnf(passengers):
     for passenger in passengers:
         if passenger['status'] != 'CNF':
@@ -44,10 +40,6 @@ def get_and_schedule_pnr_notification(pnr_notify):
     if data['chart_prepared'] or check_if_passengers_cnf(passengers):
         # The ticket is confirmed or chart prepared
         pnr_notify.delete()
-    else:
-        from pypnrstatus.tasks import schedule_pnr_notification
-        # Put the pnr_notify into the que if not confirmed yet
-        q.enqueue(schedule_pnr_notification, pnr_notify)
 
     return {'pnr_no': pnr_no, 'passengers': passengers}
 

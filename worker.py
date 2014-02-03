@@ -1,15 +1,10 @@
-import os
-import redis
-from rq import Worker, Queue, Connection
+from pypnrstatus.tasks import *
+from pypnrstatus.models import *
+from datetime import timedelta, datetime
+import time
 
-listen = ['high', 'default', 'low']
-
-redis_url = os.getenv('REDISTOGO_URL', 'redis://localhost:6379')
-
-conn = redis.from_url(redis_url)
-
-if __name__ == '__main__':
-    with Connection(conn):
-        worker = Worker(map(Queue, listen))
-        worker.work()
-
+while True:
+    pnr_notifications = PNRNotification.objects.filter(next_schedule_time__lte=datetime.now()+timedelta(minutes=5))
+    for pnr_notification in pnr_notifications:
+        schedule_pnr_notification(pnr_notification)
+    time.sleep(5*60) 
