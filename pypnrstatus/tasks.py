@@ -42,20 +42,8 @@ def schedule_pnr_notification(pnr_notify):
         # done no more work :)
         # Tell ticket is confirmed / chart prepared & delete pnr_notify
         pass
-    else:
-        pass
-        '''
-        from pypnrstatus.pnr_utils import q
-        # Compute when to reschedule
-        pnr_notify.next_schedule_time = pnr_notify.next_schedule_time + caluclate_timedelta(
-            pnr_notify.notification_frequency,
-            pnr_notify.notification_frequency_value)
-        pnr_notify.save()
-        q.enqueue(reschedule_pnr_notification, pnr_notify)
-        '''
-
-def reschedule_pnr_notification(pnr_notify):
-
-    pass
+    pnr_notify.next_schedule_time = caluclate_timedelta(pnr_notify.notification_frequency, 
+                    pnr_notify.notification_frequency_value)
+    pnr_notify.save()
 
 
