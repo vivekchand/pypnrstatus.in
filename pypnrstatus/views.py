@@ -26,6 +26,7 @@ def pnr_status(request):
 
         pnr_no = pnr_no[:10]
         try:
+            print 'trying ...'
             pnr_notify = PNRNotification.objects.get(pnr_no=pnr_no)
             pnr_notify.notification_type = notification_type
             pnr_notify.notification_type_value = notification_type_value
@@ -33,10 +34,14 @@ def pnr_status(request):
             pnr_notify.notification_frequency_value = notification_frequency_value
             pnr_notify.next_schedule_time = next_schedule_time
             pnr_notify.save()
+            print 'saving ...'
+            print pnr_notify
         except PNRNotification.DoesNotExist:
+            print 'creating'
             pnr_notify = PNRNotification.objects.create( pnr_no=pnr_no, notification_type=notification_type,
                 notification_type_value=notification_type_value, notification_frequency=notification_frequency,
                 notification_frequency_value=notification_frequency_value, next_schedule_time=next_schedule_time )
+            print pnr_notify
 
         pnr_status = get_and_schedule_pnr_notification(pnr_notify)
         return render(request, 'pnr_status.html', pnr_status)
