@@ -62,8 +62,21 @@ WSGI_APPLICATION = 'pypnrstatus.wsgi.application'
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES = {
-     'default': {
-     }
+     'default': {'ATOMIC_REQUESTS': False,
+      'AUTOCOMMIT': True,
+      'CONN_MAX_AGE': 0,
+      'ENGINE': 'django.db.backends.postgresql_psycopg2',
+      'HOST': 'ec2-54-204-2-255.compute-1.amazonaws.com',
+      'NAME': 'da92vo3bo4prgs',
+      'OPTIONS': {},
+      'PASSWORD': 'ieqeZqmGFtHL6FRlwL1-D7pFsu',
+      'PORT': 5432,
+      'TEST_CHARSET': None,
+      'TEST_COLLATION': None,
+      'TEST_MIRROR': None,
+      'TEST_NAME': None,
+      'TIME_ZONE': 'UTC',
+      'USER': 'gqrijqcihdvmnw'}
 }
 if dj_database_url.config():
     DATABASES['default'] =  dj_database_url.config()
