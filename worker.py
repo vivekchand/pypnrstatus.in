@@ -1,11 +1,11 @@
 import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pypnrstatus.settings")
 from django.conf import settings
-
+'''
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 if not settings.configured:
     settings.configure()
-'''
 import dj_database_url
 DATABASES = {
      'default': {
