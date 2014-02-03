@@ -1,4 +1,3 @@
-'''
 import os
 from django.conf import settings
 
@@ -17,7 +16,7 @@ if dj_database_url.config():
 
 if not settings.configured:
     settings.configure()
-'''
+
 from pypnrstatus.tasks import *
 from pypnrstatus.models import *
 from datetime import timedelta, datetime
