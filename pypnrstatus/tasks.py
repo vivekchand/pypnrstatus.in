@@ -18,9 +18,12 @@ def schedule_pnr_notification(pnr_notify):
     status = resp['status']
     data = resp['data']
 
+    if resp.has_key('message'):
+        return
+
     if data == {} and status == 'OK':
         # retry
-        pass
+        return
 
     print data
     passengers = data['passenger']
