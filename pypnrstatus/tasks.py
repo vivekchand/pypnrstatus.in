@@ -10,6 +10,16 @@ def get_current_status(passengers):
         i+=1
     return temp
 
+def get_current_status_sms(passengers):
+    temp=''
+    i = 1
+    for passenger in passengers:
+        temp = temp+ 'Passenger %s ' % i +'\n' + 'Current Status: ' + passenger['status']
+        temp = temp +'\n'+ 'Seat No:' + passenger['seat_number']+'\n\n'
+        i+=1
+    return temp
+
+
 def schedule_pnr_notification(pnr_notify):
     pnr_no = pnr_notify.pnr_no
     resp = requests.get('http://pnrapi.alagu.net/api/v1.0/pnr/%s'%pnr_no)
@@ -39,10 +49,19 @@ def schedule_pnr_notification(pnr_notify):
                 "subject": "PNR Status %s"%pnr_no,
                 "html": message})
     elif pnr_notify.notification_type == 'phone':
-        message = get_current_status(passengers)
-        phone = '9739788820'
-        requests.get("https://160by2.p.mashape.com/index.php?msg=%s&phone=9739788820&pwd=pypnrstatus&uid=9739788820"%message,
-            headers={"X-Mashape-Authorization": "SVq60zXo3xSsKhRHLseQxcpdntWwvdOx"});
+        import plivo
+        p = plivo.RestAPI('MAMDBMM2YYNTEXYMMWZJ', 'MjM2OWI2ZjA4YmE0ZjQzYzY4ZmFmY2RlNDJmZDlk')
+        plivo_number = '910123456789'
+        message = get_current_status_sms(passengers)
+        if len(pnr_notify.notification_type_value) == 10:
+            pnr_notify.notification_type_value = '91'+pnr_notify.notification_type_value
+        destination_number = pnr_notify.notification_type_value
+        message_params = {
+          'src':plivo_number,
+          'dst':destination_number,
+          'text':message,
+        }
+        print p.send_message(message_params)
 
     if data['chart_prepared'] or check_if_passengers_cnf(passengers):
         # done no more work :)
