@@ -10,5 +10,6 @@ urlpatterns = patterns('',
 
     url(r'^$', 'pypnrstatus.views.index', name='index'),
     url(r'^pnr_status/', 'pypnrstatus.views.pnr_status', name='pnr_status'),
+    url(r'^stop_notifications/', 'pypnrstatus.views.stop_notifications', name='stop_notifications'),
     url(r'^admin/', include(admin.site.urls)),
 )
