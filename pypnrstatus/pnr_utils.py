@@ -29,17 +29,14 @@ def get_and_schedule_pnr_notification(pnr_notify):
     data = resp['data']
 
     if data == {} and status == 'OK':
-        pnr_notify.delete()
         return {'error': 'Something went wrong real bad! \nTry again later :)'}
 
     if status == "INVALID":
-        pnr_notify.delete()
         return {'error': 'Invalid PNR Number!'}
 
     passengers = data['passenger']
     if data['chart_prepared'] or check_if_passengers_cnf(passengers):
         # The ticket is confirmed or chart prepared
-        pnr_notify.delete()
 
     return {'pnr_no': pnr_no, 'passengers': passengers}
 
