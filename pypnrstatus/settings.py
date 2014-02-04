@@ -62,8 +62,12 @@ WSGI_APPLICATION = 'pypnrstatus.wsgi.application'
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES = {
-     'default': {}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
 if dj_database_url.config():
     DATABASES['default'] =  dj_database_url.config()
 
@@ -82,14 +86,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-'''
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
