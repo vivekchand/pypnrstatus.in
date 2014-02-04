@@ -7,5 +7,5 @@ Web App of py-pnr-status ( https://github.com/vivekchand/py-pnr-status )
 
 ToDo:
 -----
-1. Host pypnrstatus in heroku
+1. SMS Notification should start working :)
 
