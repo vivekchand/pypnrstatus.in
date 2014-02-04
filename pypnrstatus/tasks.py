@@ -18,7 +18,7 @@ def schedule_pnr_notification(pnr_notify):
     status = resp['status']
     data = resp['data']
 
-    if resp.has_key('message'):
+    if data.has_key('message'):
         return
 
     if data == {} and status == 'OK':

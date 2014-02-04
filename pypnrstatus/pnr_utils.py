@@ -29,8 +29,8 @@ def get_and_schedule_pnr_notification(pnr_notify):
     data = resp['data']
 
     print data
-    if resp.has_key('message'):
-        return {'error': resp['message']}
+    if data.has_key('message'):
+        return {'error': data['message']}
 
     if data == {} and status == 'OK':
         return {'error': 'Something went wrong real bad! \nTry again later :)'}
