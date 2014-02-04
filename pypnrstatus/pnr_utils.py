@@ -37,6 +37,7 @@ def get_and_schedule_pnr_notification(pnr_notify):
     passengers = data['passenger']
     if data['chart_prepared'] or check_if_passengers_cnf(passengers):
         # The ticket is confirmed or chart prepared
+        pass
 
     return {'pnr_no': pnr_no, 'passengers': passengers}
 
