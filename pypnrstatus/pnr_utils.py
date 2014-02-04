@@ -28,6 +28,7 @@ def get_and_schedule_pnr_notification(pnr_notify):
     status = resp['status']
     data = resp['data']
 
+    print data
     if data == {} and status == 'OK':
         return {'error': 'Something went wrong real bad! \nTry again later :)'}
 

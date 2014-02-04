@@ -22,6 +22,7 @@ def schedule_pnr_notification(pnr_notify):
         # retry
         pass
 
+    print data
     passengers = data['passenger']
 
     if pnr_notify.notification_type == 'email':
@@ -42,7 +43,7 @@ def schedule_pnr_notification(pnr_notify):
         # done no more work :)
         # Tell ticket is confirmed / chart prepared & delete pnr_notify
         pass
-    pnr_notify.next_schedule_time = caluclate_timedelta(pnr_notify.notification_frequency, 
+    pnr_notify.next_schedule_time = caluclate_timedelta(pnr_notify.notification_frequency,
                     pnr_notify.notification_frequency_value)
     pnr_notify.save()
 
