@@ -9,8 +9,7 @@ import time
 
 while True:
     print 'I am doing something'
-    pnr_notifications = PNRNotification.objects.filter(next_schedule_time__lte=datetime.now()+timedelta(minutes=5),
-            next_schedule_time__gte=datetime.now()-timedelta(minutes=5))
+    pnr_notifications = PNRNotification.objects.filter(next_schedule_time__lte=datetime.now()+timedelta(minutes=5))
     print pnr_notifications
     begin = time.time()
     for pnr_notification in pnr_notifications:
