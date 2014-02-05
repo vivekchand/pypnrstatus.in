@@ -53,7 +53,7 @@ def schedule_pnr_notification(pnr_notify):
         p = plivo.RestAPI('MAMDBMM2YYNTEXYMMWZJ', 'MjM2OWI2ZjA4YmE0ZjQzYzY4ZmFmY2RlNDJmZDlk')
         plivo_number = '910123456789'
         message = get_current_status_sms(passengers)
-        message += '\n\n- pypnrstatus.in'
+        message += '\n- pypnrstatus.in'
         if len(pnr_notify.notification_type_value) == 10:
             pnr_notify.notification_type_value = '91'+pnr_notify.notification_type_value
         destination_number = pnr_notify.notification_type_value
