@@ -43,6 +43,7 @@ def schedule_pnr_notification(pnr_notify):
                     pnr_notify.notification_frequency_value)
     pnr_notify.save()
     if pnr_notify.notification_type == 'email':
+        print 'sending email ...'
         message = get_current_status(passengers)
         unsubscribe_link = "<a href='pypnrstatus.in/stop_notifications/?pnr_no=%s'>Unsubscribe (Stop Notifications)</a>"%pnr_no
         message += '<br/><br/>' + unsubscribe_link
@@ -52,7 +53,9 @@ def schedule_pnr_notification(pnr_notify):
                 "to": [pnr_notify.notification_type_value],
                 "subject": "PNR Status %s"%pnr_no,
                 "html": message})
+        print 'sent :)'
     elif pnr_notify.notification_type == 'phone':
+        print 'sending sms ...'
         import plivo
         p = plivo.RestAPI('MAMDBMM2YYNTEXYMMWZJ', 'MjM2OWI2ZjA4YmE0ZjQzYzY4ZmFmY2RlNDJmZDlk')
         plivo_number = '910123456789'
@@ -67,6 +70,7 @@ def schedule_pnr_notification(pnr_notify):
           'text':message,
         }
         print p.send_message(message_params)
+        print 'sent :)'
 
     if data['chart_prepared'] or check_if_passengers_cnf(passengers):
         # done no more work :)
