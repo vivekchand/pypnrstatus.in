@@ -18,6 +18,6 @@ while True:
     end = time.time()
     diff = int(end-begin)
     sleep_time = int((1*60) - (diff/60))
-    print 'sleeping for %s min' % sleep_time/60
+    print 'sleeping for %s min' % (sleep_time/60)
     if sleep_time>0:
         time.sleep(sleep_time)
