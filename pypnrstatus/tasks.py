@@ -26,6 +26,10 @@ def schedule_pnr_notification(pnr_notify):
     resp = requests.get('http://pnrapi.alagu.net/api/v1.0/pnr/%s'%pnr_no)
     resp = json.loads(resp.content)
 
+    pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(pnr_notify.notification_frequency,
+                    pnr_notify.notification_frequency_value)
+    pnr_notify.save()
+
     status = resp['status']
     data = resp['data']
 
@@ -39,13 +43,10 @@ def schedule_pnr_notification(pnr_notify):
     print data
     passengers = data['passenger']
 
-    pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(pnr_notify.notification_frequency,
-                    pnr_notify.notification_frequency_value)
-    pnr_notify.save()
     if pnr_notify.notification_type == 'email':
         print 'sending email ...'
         message = get_current_status(passengers)
-        unsubscribe_link = "<a href='pypnrstatus.in/stop_notifications/?pnr_no=%s'>Unsubscribe (Stop Notifications)</a>"%pnr_no
+        unsubscribe_link = "<a href='pypnrstatus.in/stop_notifications/?pnrno=%s'>Unsubscribe (Stop Notifications)</a>"%pnr_no
         message += '<br/><br/>' + unsubscribe_link
         requests.post('https://api.mailgun.net/v2/pypnrstatus.in/messages',
             auth=("api", "key-3du65990xbf63jlr5ihvlpir2k82jqr5"),

@@ -44,10 +44,13 @@ def pnr_status(request):
         return HttpResponseRedirect('/')
 
 def stop_notifications(request):
-    pnr_no = request.GET.get('pnr_no')
-    try:
-        pnr_notify = PNRNotification.objects.get(pnr_no=pnr_no)
-        pnr_notify.delete()
-        return HttpResponse('unsubscribed for pypnrstatus.in notifications!')
-    except:
-        return HttpResponseBadRequest('No such pnr_no!')
+    pnr_no = request.GET.get('pnrno')
+    if pnr_no:
+        try:
+            pnr_notify = PNRNotification.objects.get(pnr_no=pnr_no)
+            pnr_notify.delete()
+            return render(request, 'stop_notifications.html', {'message':'Successfully Unsubscribed from pypnrstatus.in notifications!'}) 
+        except:
+            return render(request, 'stop_notifications.html', {'message': 'No such PNR number!'})
+    else:
+        return render(request, 'stop_notifications.html')
