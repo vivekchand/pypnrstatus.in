@@ -39,6 +39,9 @@ def schedule_pnr_notification(pnr_notify):
     print data
     passengers = data['passenger']
 
+    pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(pnr_notify.notification_frequency,
+                    pnr_notify.notification_frequency_value)
+    pnr_notify.save()
     if pnr_notify.notification_type == 'email':
         message = get_current_status(passengers)
         unsubscribe_link = "<a href='pypnrstatus.in/stop_notifications/?pnr_no=%s'>Unsubscribe (Stop Notifications)</a>"%pnr_no
@@ -69,8 +72,5 @@ def schedule_pnr_notification(pnr_notify):
         # done no more work :)
         # Tell ticket is confirmed / chart prepared & delete pnr_notify
         pass
-    pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(pnr_notify.notification_frequency,
-                    pnr_notify.notification_frequency_value)
-    pnr_notify.save()
 
 
