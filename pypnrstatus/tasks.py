@@ -1,6 +1,7 @@
 import requests
 import urllib2
 from pypnrstatus.pnr_utils import *
+import datetime
 def get_current_status(passengers):
     temp=''
     i = 1
@@ -68,7 +69,7 @@ def schedule_pnr_notification(pnr_notify):
         # done no more work :)
         # Tell ticket is confirmed / chart prepared & delete pnr_notify
         pass
-    pnr_notify.next_schedule_time = pnr_notify.next_schedule_time + caluclate_timedelta(pnr_notify.notification_frequency,
+    pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(pnr_notify.notification_frequency,
                     pnr_notify.notification_frequency_value)
     pnr_notify.save()
 
