@@ -14,8 +14,8 @@ def get_current_status_sms(passengers):
     temp=''
     i = 1
     for passenger in passengers:
-        temp = temp+ 'Passenger %s ' % i +'\n' + 'Current Status: ' + passenger['status']
-        temp = temp +'\n'+ 'Seat No:' + passenger['seat_number']+'\n\n'
+        temp = temp+ 'P%s ' % i +'\n' + 'Curr Stat.: ' + passenger['status']
+        temp = temp +'\n'+ 'SNo:' + passenger['seat_number']+'\n\n'
         i+=1
     return temp
 
