@@ -18,5 +18,6 @@ while True:
     end = time.time()
     diff = int(end-start)
     sleep_time = (5*60)-(diff/60)
+    print 'sleep time: %s min'% (sleep_time/60)
     if sleep_time>0:
         time.sleep(sleep_time)
