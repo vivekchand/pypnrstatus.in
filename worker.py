@@ -16,7 +16,8 @@ while True:
     for pnr_notification in pnr_notifications:
         schedule_pnr_notification(pnr_notification)
     end = time.time()
-    sleep_time = int(end-begin)
-    print 'sleep time %s' % sleep_time
-    print 'sleeping for 1 min'
-    time.sleep(1*60)
+    diff = int(end-begin)
+    sleep_time = int((1*60) - (diff/60))
+    print 'sleeping for %s min' % sleep_time
+    if sleep_time>0:
+        time.sleep(sleep_time)
