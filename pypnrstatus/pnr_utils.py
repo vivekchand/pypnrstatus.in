@@ -30,12 +30,15 @@ def get_and_schedule_pnr_notification(pnr_notify):
 
     print data
     if data.has_key('message'):
+        pnr_notify.delete()
         return {'error': data['message']}
 
     if data == {} and status == 'OK':
+        pnr_notify.delete()
         return {'error': 'Something went wrong real bad! \nTry again later :)'}
 
     if status == "INVALID":
+        pnr_notify.delete()
         return {'error': 'Invalid PNR Number!'}
 
     passengers = data['passenger']
