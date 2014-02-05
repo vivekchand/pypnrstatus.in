@@ -7,7 +7,7 @@ from pypnrstatus.models import *
 from datetime import timedelta, datetime
 import time
 
-while True:
+while False:
     print 'I am doing something'
     pnr_notifications = PNRNotification.objects.filter(next_schedule_time__lte=datetime.now()+timedelta(minutes=1))
     print pnr_notifications
