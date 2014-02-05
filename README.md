@@ -7,5 +7,4 @@ Web App of py-pnr-status ( https://github.com/vivekchand/py-pnr-status )
 
 ToDo:
 -----
-1. SMS Notification should start working :)
-2. Add a way to stop sms / email notifications.
+1. Add a way to stop sms / email notifications.
