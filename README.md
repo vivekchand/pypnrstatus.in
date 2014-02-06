@@ -5,6 +5,8 @@ Web App of py-pnr-status ( https://github.com/vivekchand/py-pnr-status )
 
 ![alt tag](https://raw.github.com/vivekchand/pypnrstatus.in/master/pypnrstatus.png)
 
+Dev Setup in Local:
+-------------------
 ```python
 python manage.py syncdb  # Creates Databases
 sh bin/web  # Starts Web Server & Worker
