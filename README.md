@@ -8,8 +8,12 @@ Web App of py-pnr-status ( https://github.com/vivekchand/py-pnr-status )
 Dev Setup in Local:
 -------------------
 ```python
-python manage.py syncdb  # Creates Databases
-sh bin/web  # Starts Web Server & Worker
+step1: python manage.py syncdb  # Creates Database
+
+step2: sh bin/web  # Starts Web Server & Worker
+              or
+       python manage.py runserver
+       python worker.py
 ```
 
 ToDo:
