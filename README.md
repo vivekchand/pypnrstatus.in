@@ -14,6 +14,7 @@ step2: sh bin/web  # Starts Web Server & Worker
               or
        python manage.py runserver
        python worker.py
+       
 step3: Go to http://127.0.0.1:8000/       
 ```
 
