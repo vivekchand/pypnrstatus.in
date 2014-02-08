@@ -41,7 +41,8 @@ def get_pnr_status(pnr_notify):
     print data
     if data.has_key('message'):
         pnr_notify.delete()
-        return {'error': data['message']}
+        print data['message']
+        return {'error': 'Something went wrong real bad! \nTry again later :)'}
 
     if data == {} and status == 'OK':
         pnr_notify.delete()
