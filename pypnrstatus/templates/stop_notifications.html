@@ -9,8 +9,6 @@
 </head>
 <body>
    <div class="container">
-     <a href="https://github.com/vivekchand/pypnrstatus.in"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>        
-
       {% if message %}
         <div class="jumbotron">
             <h3>{{ message }}</h3>
@@ -18,7 +16,7 @@
       {% else %}
       <form class="form-signin" role="form" action="/stop_notifications" method="GET">
         <div class="form-group">
-            <h3>Stop Notifications for PNR</h3>
+            <h4>Stop Notifications for PNR</h4>
             <input type="text" class="form-control" name="pnrno" placeholder="PNR Number" required autofocus>
         </div>
         <button class="btn btn-lg btn-danger btn-block" type="submit">Stop Notifications</button>
