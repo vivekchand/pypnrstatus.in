@@ -8,6 +8,8 @@ Web App of py-pnr-status ( https://github.com/vivekchand/py-pnr-status )
 Dev Setup in Local:
 -------------------
 ```
+step0: pip install -r requirements.txt
+
 step1: python manage.py syncdb  # Creates Database
 
 step2: sh bin/web  # Starts Web Server & Worker
