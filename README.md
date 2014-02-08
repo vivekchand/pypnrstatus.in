@@ -20,4 +20,4 @@ step3: Go to http://127.0.0.1:8000/
 
 ToDo:
 -----
-1. Stop sending notifications when ticket is cancelled / journey happened / chart prepared / ticket confirmed.
+1. Better form validation
