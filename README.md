@@ -23,3 +23,9 @@ step3: Go to http://127.0.0.1:8000/
 ToDo:
 -----
 1. Better form validation
+
+Thanks to:
+----------
+```
+@alagu : The pypnrstatus.in app is based on API provided by https://github.com/alagu/pnrapi-ruby
+```
