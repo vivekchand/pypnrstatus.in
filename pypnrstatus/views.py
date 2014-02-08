@@ -5,7 +5,7 @@ if not settings.configured:
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from pypnrstatus.models import PNRNotification
-from pypnrstatus.pnr_utils import get_and_schedule_pnr_notification, caluclate_timedelta
+from pypnrstatus.pnr_utils import get_pnr_status, caluclate_timedelta
 import datetime
 
 def index(request):
@@ -38,7 +38,7 @@ def pnr_status(request):
                 notification_type_value=notification_type_value, notification_frequency=notification_frequency,
                 notification_frequency_value=notification_frequency_value, next_schedule_time=next_schedule_time )
 
-        pnr_status = get_and_schedule_pnr_notification(pnr_notify)
+        pnr_status = get_pnr_status(pnr_notify)
         return render(request, 'pnr_status.html', pnr_status)
     else:
         return HttpResponseRedirect('/')
@@ -49,7 +49,7 @@ def stop_notifications(request):
         try:
             pnr_notify = PNRNotification.objects.get(pnr_no=pnr_no)
             pnr_notify.delete()
-            return render(request, 'stop_notifications.html', {'message':'Successfully Unsubscribed from pypnrstatus.in notifications!'}) 
+            return render(request, 'stop_notifications.html', {'message':'Successfully Unsubscribed from pypnrstatus.in notifications!'})
         except:
             return render(request, 'stop_notifications.html', {'message': 'No such PNR number!'})
     else:

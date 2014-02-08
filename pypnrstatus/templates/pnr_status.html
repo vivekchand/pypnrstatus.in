@@ -13,26 +13,35 @@
      <div class="jumbotron">
       {% if error %}
         <h3>{{error}}</h3>
+        <br/>
+        Do consider checking your pnr status here: <a href='http://www.indianrail.gov.in/pnr_Enq.html'>http://www.indianrail.gov.in/pnr_Enq.html</a>
       {% else %}
-      <h3>PNR {{pnr_no}}</h3>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Current Status</th>
-            <th>Seat Number</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for passenger in passengers %}
-          <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>{{ passenger.status }}</td>
-            <td>{{ passenger.seat_number }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+        <h3>PNR {{pnr_no}}</h3>
+          {% if ticket_is_cancelled %}
+            <h2>Your ticket was cancelled!</h2>
+          {% elif ticket_is_confirmed %}
+            <h2>Your ticket is confirmed :)</h2>
+          {% elif chart_prepared_for_ticket %}
+            <h2>Chart Prepared for your ticket.</h2>
+          {% endif %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Current Status</th>
+                <th>Seat Number</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for passenger in passengers %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ passenger.status }}</td>
+                <td>{{ passenger.seat_number }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
       {% endif %}
      </div>
     </div><!-- /example -->
