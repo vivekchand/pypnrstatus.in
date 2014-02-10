@@ -43,7 +43,7 @@
             </tbody>
           </table>
          {% if will_get_notifications %}
-            {{ pnr_notify.notification_type }}
+            <h4>You will be notified about the pnr status to your {{ pnr_notify.notification_type }} every {{ pnr_notify.notification_frequency_value }} {{ pnr_notify.notification_frequency }}.</h4>
          {% endif %}
       {% endif %}
      </div>
