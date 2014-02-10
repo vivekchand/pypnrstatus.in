@@ -55,19 +55,25 @@ def get_pnr_status(pnr_notify):
     passengers = data['passenger']
 
     ticket_is_cancelled = ticket_is_confirmed = chart_prepared_for_ticket = None
+    will_get_notifications = True
 
     if check_if_ticket_cancelled(passengers):
         ticket_is_cancelled = True
+        will_get_notifications = False
     if check_if_passengers_cnf(passengers):
         ticket_is_confirmed = True
+        will_get_notifications = False
     if data['chart_prepared']:
         chart_prepared_for_ticket = True
+        will_get_notifications = False
 
     json_dict =  {'pnr_no': pnr_no,
                   'passengers': passengers,
                   'ticket_is_cancelled': ticket_is_cancelled,
                   'ticket_is_confirmed': ticket_is_confirmed,
-                   'chart_prepared_for_ticket': chart_prepared_for_ticket }
+                  'chart_prepared_for_ticket': chart_prepared_for_ticket,
+                  'will_get_notifications': will_get_notifications,
+                  'pnr_notify': pnr_notify }
     return json_dict
 
 

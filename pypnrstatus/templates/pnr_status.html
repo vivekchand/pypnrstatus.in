@@ -42,6 +42,9 @@
               {% endfor %}
             </tbody>
           </table>
+         {% if will_get_notifications %}
+            {{ pnr_notify.notification_type }}
+         {% endif %}
       {% endif %}
      </div>
     </div><!-- /example -->
