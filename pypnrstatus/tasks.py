@@ -6,7 +6,11 @@ import datetime
 def schedule_pnr_notification(pnr_notify):
     pnr_no = pnr_notify.pnr_no
     resp = requests.get('http://pnrapi.alagu.net/api/v1.0/pnr/%s'%pnr_no)
-    resp = json.loads(resp.content)
+
+    try:
+        resp = json.loads(resp.content)
+    except ValueError:
+        return
 
     status = resp['status']
     data = resp['data']
