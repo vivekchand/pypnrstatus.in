@@ -33,7 +33,11 @@ def caluclate_timedelta(notification_frequency, notification_frequency_value):
 def get_pnr_status(pnr_notify):
     pnr_no = pnr_notify.pnr_no
     resp = requests.get('http://pnrapi.alagu.net/api/v1.0/pnr/%s'%pnr_no)
-    resp = json.loads(resp.content)
+    try:
+        resp = json.loads(resp.content)
+    except ValueError:
+        pnr_notify.delete()
+        return {'error': 'Something went wrong real bad! \nTry again later :)'}
 
     status = resp['status']
     data = resp['data']
