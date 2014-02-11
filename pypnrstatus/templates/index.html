@@ -9,8 +9,16 @@
     <title>PyPNRStatus.in - Automates the pain of checking if PNR status is confirmed.</title>
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=232668213588037";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
    <div class="container">
-     <a href="https://github.com/vivekchand/pypnrstatus.in"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
 
      <h3 class="text-center" style="color:#AAA;">PyPNRStatus.in</h3>
      <p class="text-center" style="color:#AAP;"><small>Automates the pain of checking if PNR status is confirmed.</small></p>
@@ -40,11 +48,16 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
       </form>
       <br/>
+      <center><a href='/stop_notifications' class='btn btn-default'>Stop Notifciations</a></center>
+        <br/>
+        <center>
+<div class="fb-like" data-href="http://www.pypnrstatus.in/" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div>
+<br/>
+<br/>
+<iframe src="http://ghbtns.com/github-btn.html?user=vivekchand&repo=pypnrstatus.in&type=fork"
+  allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
+        </center>
       <br/>
-      <br/>
-      <br/>
-      <div class="form-group">
-          <center><a href='/stop_notifications' class='btn btn-default'>Stop Notifciations</a></center>
       </div>
     </div> <!-- /container -->
 </body>
