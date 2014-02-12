@@ -2,7 +2,7 @@
     <br/>
     <div class="form-group">
         <h4>Enter PNR No.</h4>
-        <input type="text" class="form-control" name="pnrno" placeholder="PNR Number" required autofocus>
+        <input type="text" class="form-control" id="js-pnrno" name="pnrno" placeholder="PNR Number" required autofocus>
     </div>
     <div class="form-group">
         <h4>Notify to my</h4>
@@ -10,11 +10,11 @@
             <option value="email" selected=True>Email</option>
             <option value="phone">Phone</option>
         </select>
-        <input type="text" class="form-control" name="email_or_phone" placeholder="Email or Phone" required>
+        <input type="text" class="form-control" id="js-email-or-phone" name="email_or_phone" placeholder="Email or Phone" required>
     </div>
     <div class="form-group">
         <h4>Notify me every</h4>
-        <input type="text" class="form-control" value="3" name="notifyValue" placeholder="Enter a number" required>
+        <input type="text" class="form-control" value="3" id="js-notify-value" name="notifyValue" placeholder="Enter a number" required>
         <select name='notification_frequency' class="form-control">
             <option value="minutes">Minutes</option>
             <option value="hours" selected=True>Hours</option>
