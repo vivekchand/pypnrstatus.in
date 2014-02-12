@@ -1,19 +1,23 @@
-<form class="form-signin" role="form" action="pnr_status/" method="POST">{% csrf_token %}
+<form class="form-signin" id="js-pnr-form" role="form" action="pnr_status/" method="POST">{% csrf_token %}
     <br/>
     <div class="form-group">
         <h4>Enter PNR No.</h4>
-        <input type="text" class="form-control" id="js-pnrno" name="pnrno" placeholder="PNR Number" required autofocus>
+        <label class="control-label" style="display:none;" id="js-pnrno-err" for="inputError1">Enter valid PNR No.</label>
+        <input type="text" class="form-control" id="js-pnrno" name="pnrno" placeholder="10 digit PNR Number" required autofocus>
     </div>
     <div class="form-group">
         <h4>Notify to my</h4>
-        <select name='notification_type' class="form-control">
+        <select name='notification_type' id="js-notify-via" class="form-control">
             <option value="email" selected=True>Email</option>
             <option value="phone">Phone</option>
         </select>
+        <label class="control-label" style="display:none;" id="js-email-err" for="inputError2">Enter a valid Email.</label>
+        <label class="control-label" style="display:none;" id="js-phone-err" for="inputError2">Enter a valid 10 digit Phone No.</label>
         <input type="text" class="form-control" id="js-email-or-phone" name="email_or_phone" placeholder="Email or Phone" required>
     </div>
     <div class="form-group">
         <h4>Notify me every</h4>
+        <label class="control-label" style="display:none;" id="js-notify-value-err" for="inputError2">Enter proper interval.</label>
         <input type="text" class="form-control" value="3" id="js-notify-value" name="notifyValue" placeholder="Enter a number" required>
         <select name='notification_frequency' class="form-control">
             <option value="minutes">Minutes</option>
@@ -21,7 +25,7 @@
             <option value="days">Days</option>
         </select>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    <button class="btn btn-lg btn-primary btn-block" data-loading-text="Checking PNR Status ..." id="js-submit-btn" type="submit">Submit</button>
 </form>
 <br/><br/>
 <center><a href='/stop_notifications' class='btn btn-default'>Stop Notifciations</a></center>

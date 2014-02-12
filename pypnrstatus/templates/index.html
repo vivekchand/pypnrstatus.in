@@ -14,7 +14,7 @@
    <div class="container">
      {% include "form_me_on_gh.html" %}
      <div class="col-md-3"></div>
-     <div class="col-md-6">     
+     <div class="col-md-6">
         {% include "vision.html" %}
          {% include "pnr_form.html" %}
      </div>
@@ -40,5 +40,64 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
 </script>
+<script type="text/javascript">
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+function validatePhone(inputtxt) {
+    var phoneno = /^\d{10}$/;
+    if((inputtxt.match(phoneno)))
+        return true;
+    else
+        return false;
+}
 
+$('#js-submit-btn').on('click', function(event){
+    event.preventDefault();
+    var form = $('#js-pnr-form');
+    var $btn = $(this);
+    $btn.button('loading');
+    $('#js-pnrno-err').hide();
+    $('#js-email-err').hide();
+    $('#js-phone-err').hide();
+    $('#js-notify-value-err').hide();
+    $('#js-pnrno').parent().removeClass('has-error');
+    $('#js-email-or-phone').parent().removeClass('has-error');
+    $('#js-notify-value').parent().removeClass('has-error');
+
+    var pnr_no = $('#js-pnrno').val(),
+        notify_via = $('#js-notify-via').val()
+        email_or_phone = $('#js-email-or-phone').val(),
+        notify_value = $('#js-notify-value').val();
+    if( pnr_no.length != 10 ){
+        $('#js-pnrno').parent().addClass('has-error');
+        $('#js-pnrno-err').show();
+        $btn.button('reset');
+        return;
+    }
+    if( notify_via == 'email' && !validateEmail( email_or_phone ) ) {
+        $('#js-email-or-phone').parent().addClass('has-error');
+        $('#js-email-err').show();
+        $btn.button('reset');
+        return;
+    }
+    if( notify_via == 'phone' && !validatePhone( email_or_phone ) ) {
+        $('#js-email-or-phone').parent().addClass('has-error');
+        $('#js-phone-err').show();
+        $btn.button('reset');
+        return;
+    }
+    if ( notify_value < 0 || notify_value != parseInt(notify_value) ) {
+        $('#js-notify-value').parent().addClass('has-error');
+        $('#js-notify-value-err').show();
+        $btn.button('reset');
+        return;
+    }
+
+    form.submit();
+});
+
+
+</script>
 </html>
