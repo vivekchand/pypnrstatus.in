@@ -1,71 +1,43 @@
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
     <link rel="shortcut icon" href="http://www.iconj.com/ico/k/b/kb1xnnwnmo.ico" type="image/x-icon" />
     <title>PyPNRStatus.in - Automates the pain of checking if PNR status is confirmed.</title>
-    <meta property="og:title" content="PyPNRStatus.in - Automates the pain of checking if PNR status is confirmed." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://www.pypnrstatus.in/" />
-    <meta property="og:image" content="http://hdwallpapersz.net/admin/photo_album/163processed/big-HD-Indian-trains-hd-wallpapers.jpg" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="400" />
-    <meta property="og:image:height" content="400" />
+    {% include "meta.html" %}
 </head>
 <body>
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=232668213588037";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-
+   <div id="fb-root"></div>
    <div class="container">
-
-     <h3 class="text-center" style="color:#AAA;">PyPNRStatus.in</h3>
-     <p class="text-center" style="color:#AAP;"><small>Automates the pain of checking if Indian Rail PNR status is confirmed.</small></p>
-      <form class="form-signin" role="form" action="pnr_status/" method="POST">{% csrf_token %}
-        <br/>
-        <div class="form-group">
-            <h4>Enter PNR No.</h4>
-            <input type="text" class="form-control" name="pnrno" placeholder="PNR Number" required autofocus>
-        </div>
-        <div class="form-group">
-            <h4>Notify to my</h4>
-            <select name='notification_type' class="form-control">
-                <option value="email" selected=True>Email</option>
-                <option value="phone">Phone</option>
-            </select>
-            <input type="text" class="form-control" name="email_or_phone" placeholder="Email or Phone" required>
-        </div>
-        <div class="form-group">
-            <h4>Notify me every</h4>
-            <input type="text" class="form-control" value="3" name="notifyValue" placeholder="Enter a number" required>
-            <select name='notification_frequency' class="form-control">
-                <option value="minutes">Minutes</option>
-                <option value="hours" selected=True>Hours</option>
-                <option value="days">Days</option>
-            </select>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-      </form>
-      <br/>
-      <center><a href='/stop_notifications' class='btn btn-default'>Stop Notifciations</a></center>
-        <br/>
-        <center>
-<div class="fb-like" data-href="http://www.pypnrstatus.in/" data-layout="button" data-action="like" data-show-faces="true" data-share="true" ref="http://upload.wikimedia.org/wikipedia/en/b/ba/Indian_Railway.svg"></div>
-<br/>
-<br/>
-<iframe src="http://ghbtns.com/github-btn.html?user=vivekchand&repo=pypnrstatus.in&type=fork"
-  allowtransparency="true" frameborder="0" scrolling="0" width="53" height="20"></iframe>
-        </center>
-      <br/>
-      </div>
+     {% include "form_me_on_gh.html" %}
+     <div class="col-md-3"></div>
+     <div class="col-md-6">     
+        {% include "vision.html" %}
+         {% include "pnr_form.html" %}
+     </div>
+     <div class="col-md-3">
+         {% include "fb_btn.html" %}
+     </div>
     </div> <!-- /container -->
 </body>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=232668213588037";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
 </html>
