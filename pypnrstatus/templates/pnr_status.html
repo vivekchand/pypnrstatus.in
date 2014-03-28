@@ -16,14 +16,19 @@
         <br/>
         Do consider checking your pnr status here: <a href='http://www.indianrail.gov.in/pnr_Enq.html'>http://www.indianrail.gov.in/pnr_Enq.html</a>
       {% else %}
-        <h3>PNR {{pnr_no}}</h3>
+	  <div class="alert alert-success">
+	  PNR {{pnr_no}}<br/>
+	  <h5>
+	  <strong>
           {% if ticket_is_cancelled %}
-            <h2>Your ticket was cancelled!</h2>
+            Your ticket was cancelled!
           {% elif ticket_is_confirmed %}
-            <h2>Your ticket is confirmed :)</h2>
+            Your ticket is confirmed
           {% elif chart_prepared_for_ticket %}
-            <h2>Chart Prepared for your ticket.</h2>
+            Chart Prepared for your ticket.
           {% endif %}
+	  </strong>
+	  </h5>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -43,9 +48,14 @@
             </tbody>
           </table>
          {% if will_get_notifications %}
-            <h4>You will be notified about the pnr status to your {{ pnr_notify.notification_type }} every {{ pnr_notify.notification_frequency_value }} {{ pnr_notify.notification_frequency }}.</h4>
+	    <h5>
+	    <strong>
+            You will be notified about the pnr status to your {{ pnr_notify.notification_type }} every {{ pnr_notify.notification_frequency_value }} {{ pnr_notify.notification_frequency }}.
+	    </strong>
+	    </h5>
          {% endif %}
       {% endif %}
+	  </div>
      </div>
     </div><!-- /example -->
 </body>
