@@ -37,7 +37,7 @@ def get_pnr_status(pnr_notify):
         resp = json.loads(resp.content)
     except ValueError:
         pnr_notify.delete()
-        return {'error': 'Something went wrong real bad! \nTry again later :)'}
+        return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
 
     status = resp['status']
     data = resp['data']
@@ -46,15 +46,15 @@ def get_pnr_status(pnr_notify):
     if data.has_key('message'):
         pnr_notify.delete()
         print data['message']
-        return {'error': 'Something went wrong real bad! \nTry again later :)'}
+        return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
 
     if data == {} and status == 'OK':
         pnr_notify.delete()
-        return {'error': 'Something went wrong real bad! \nTry again later :)'}
+        return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
 
     if status == "INVALID":
         pnr_notify.delete()
-        return {'error': 'Invalid PNR Number!'}
+        return {'error': 'Invalid PNR Number %s!'% prn_no}
 
     passengers = data['passenger']
 
