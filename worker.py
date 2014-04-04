@@ -21,6 +21,6 @@ while True:
         print 'sleeping for %s min' % (sleep_time/60)
         if sleep_time>0:
             time.sleep(sleep_time)
-    except e:
+    except:
         # Send email/sms notification to me.
         pass
