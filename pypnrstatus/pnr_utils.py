@@ -139,7 +139,7 @@ def send_sms(message, phone_no):
 # email helpers
 def send_pnr_status_email(passengers, pnr_notify):
     message = get_current_status(passengers)
-    unsubscribe_link = "<a href='pypnrstatus.in/stop_notifications/?pnrno=%s'>Unsubscribe (Stop Notifications)</a>"%pnr_no
+    unsubscribe_link = "<a href='pypnrstatus.in/stop_notifications/?pnrno=%s'>Unsubscribe (Stop Notifications)</a>"%pnr_notify.pnr_no
     message += '<br/><br/>' + unsubscribe_link
     subject = "PNR Status %s"%pnr_notify.pnr_no
     to_addr = pnr_notify.notification_type_value
