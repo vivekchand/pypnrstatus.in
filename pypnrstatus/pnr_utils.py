@@ -1,5 +1,6 @@
 import requests
 import json
+from requests.exceptions import ConnectionError
 
 import datetime
 
@@ -39,7 +40,11 @@ def schedule_notification_now(pnr_notify):
 
 def get_pnr_status(pnr_notify):
     pnr_no = pnr_notify.pnr_no
-    resp = requests.get('http://pnrapi.alagu.net/api/v1.0/pnr/%s'%pnr_no)
+    try:
+	resp = requests.get('http://pnrapi.alagu.net/api/v1.0/pnr/%s'%pnr_no)
+    except ConnectionError:
+	return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
+
     try:
         resp = json.loads(resp.content)
     except ValueError:
