@@ -1,7 +1,7 @@
 import requests
 import json
 from requests.exceptions import ConnectionError
-
+from django.utils.html import strip_tags
 import datetime
 
 def check_if_passengers_cnf(passengers):
@@ -38,10 +38,10 @@ def schedule_notification_now(pnr_notify):
     pnr_notify.next_schedule_time = now + timedelta
     pnr_notify.save()
 
-def get_pnr_status(pnr_notify):
+def get_pnr_status(pnr_notify, delete_on_fail=True):
     pnr_no = pnr_notify.pnr_no
     try:
-	resp = requests.get('http://pnrapi.alagu.net/api/v1.0/pnr/%s'%pnr_no)
+	resp = requests.get('http://pnrwala.com/pnr2.php?pnr=%s'%pnr_no)
     except ConnectionError:
 	return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
 
@@ -51,24 +51,18 @@ def get_pnr_status(pnr_notify):
         pnr_notify.delete()
         return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
 
-    status = resp['status']
-    data = resp['data']
 
-    print data
-    if data.has_key('message'):
-        pnr_notify.delete()
-        print data['message']
+    if resp.get('response code'):
+        if delete_on_fail:
+           pnr_notify.delete()
         return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
 
-    if data == {} and status == 'OK':
-        pnr_notify.delete()
-        return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
-
-    if status == "INVALID":
-        pnr_notify.delete()
-        return {'error': 'Invalid PNR Number %s!'% prn_no}
-
-    passengers = data['passenger']
+    def _map_passenger(passenger):
+	return {
+	   'seat_number': strip_tags(passenger['Booking Status ']).strip(),
+	   'status': strip_tags(passenger['* Current Status ']).strip()
+	}
+    passengers = [_map_passenger(resp[key]) for key in resp.keys() if key.isdigit()]
 
     ticket_is_cancelled = ticket_is_confirmed = chart_prepared_for_ticket = None
     will_get_notifications = True
@@ -81,7 +75,7 @@ def get_pnr_status(pnr_notify):
         ticket_is_confirmed = True
         will_get_notifications = False
         schedule_notification_now(pnr_notify)
-    if data['chart_prepared']:
+    if strip_tags(resp.get('Charting Status')).strip() == 'CHART PREPARED':
         chart_prepared_for_ticket = True
         will_get_notifications = False
         schedule_notification_now(pnr_notify)

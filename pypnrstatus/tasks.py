@@ -4,32 +4,16 @@ from pypnrstatus.pnr_utils import *
 import datetime
 
 def schedule_pnr_notification(pnr_notify):
-    pnr_no = pnr_notify.pnr_no
-    resp = requests.get('http://pnrapi.alagu.net/api/v1.0/pnr/%s'%pnr_no)
+    pnr_status_dict = get_pnr_status(pnr_notify)
 
-    try:
-        resp = json.loads(resp.content)
-    except ValueError:
-        return
-
-    status = resp['status']
-    data = resp['data']
-
-    if data.has_key('message'):
-        print data['message']
-        return
-
-    if data == {} and status == 'OK':
-        print data
-        # retry
-        return
+    if pnr_status_dict.get('error'):
+       return
 
     pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(pnr_notify.notification_frequency,
                     pnr_notify.notification_frequency_value)
     pnr_notify.save()
 
-    print data
-    passengers = data['passenger']
+    passengers = pnr_status_dict['passengers']
     notify_type = pnr_notify.notification_type
 
     if check_if_ticket_cancelled(passengers):
