@@ -4,7 +4,7 @@ from pypnrstatus.pnr_utils import *
 import datetime
 
 def schedule_pnr_notification(pnr_notify):
-    pnr_status_dict = get_pnr_status(pnr_notify)
+    pnr_status_dict = get_pnr_status(pnr_notify, delete_on_fail=False)
 
     if pnr_status_dict.get('error'):
        return
