@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls.static import static
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -13,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^pnr_status/', 'pypnrstatus.views.pnr_status', name='pnr_status'),
     url(r'^stop_notifications/', 'pypnrstatus.views.stop_notifications', name='stop_notifications'),
     url(r'^admin/', include(admin.site.urls)),
-)
+)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if not settings.DEBUG:
     urlpatterns += patterns('',

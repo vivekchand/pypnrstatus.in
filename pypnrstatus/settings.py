@@ -29,8 +29,6 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates'),
 )
 
-
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -56,6 +54,14 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'pypnrstatus.urls'
 
 WSGI_APPLICATION = 'pypnrstatus.wsgi.application'
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/var/www/example.com/media/"
+MEDIA_ROOT = BASE_DIR+'/static/'
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://example.com/media/", "http://media.example.com/"
+MEDIA_URL = '/media/'
 
 
 # Database
