@@ -21,7 +21,7 @@ TIME_ZONE = None
 SECRET_KEY = '5f)c)v_rfscg!-k1$(+4e@bm)mlh$ds6jq^iq0w_$46w@$bi5p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
