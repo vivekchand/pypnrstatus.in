@@ -86,8 +86,8 @@ def get_current_status(passengers):
     temp=''
     i = 1
     for passenger in passengers:
-        temp = temp+ 'Passenger %s ' % i +'<br/>' + 'Current Status: ' + passenger['status']
-        temp = temp +'<br/>'+ 'Seat Number: ' + passenger['seat_number']+'<br/><br/>'
+        temp = temp+ 'Passenger %s ' % i +'<br/>' + 'Booking Status: ' + passenger['status']
+        temp = temp +'<br/>'+ 'Current Status: ' + passenger['seat_number']+'<br/><br/>'
         i+=1
     return temp
 
@@ -95,8 +95,8 @@ def get_current_status_sms(passengers):
     temp=''
     i = 1
     for passenger in passengers:
-        temp = temp+ 'P%s ' % i +'\n' + 'Curr Stat.: ' + passenger['status']
-        temp = temp +'\n'+ 'SNo:' + passenger['seat_number']+'\n\n'
+        temp = temp+ 'P%s ' % i +'\n' + 'Book Stat.: ' + passenger['status']
+        temp = temp +'\n'+ 'Curr Stat:' + passenger['seat_number']+'\n\n'
         i+=1
     return temp
 
