@@ -2,6 +2,7 @@ import requests
 import json
 from requests.exceptions import ConnectionError
 from django.utils.html import strip_tags
+from pnrapi import pnrapi
 import datetime
 
 def check_if_passengers_cnf(passengers):
@@ -40,29 +41,20 @@ def schedule_notification_now(pnr_notify):
 
 def get_pnr_status(pnr_notify, delete_on_fail=True):
     pnr_no = pnr_notify.pnr_no
-    try:
-	resp = requests.get('http://pnrwala.com/pnr2.php?pnr=%s'%pnr_no)
-    except ConnectionError:
-	return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
-
-    try:
-        resp = json.loads(resp.content)
-    except ValueError:
-        pnr_notify.delete()
-        return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
-
-
-    if resp.get('response code'):
+    p = pnrapi.PnrApi(pnr_no)
+    if not p.request():
         if delete_on_fail:
-           pnr_notify.delete()
+            pnr_notify.delete()
         return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
+    resp = p.get_json()
+    # resp = {'reserved_upto': 'MDU', 'from': 'MAD', 'boarding_point': 'SBC', 'total_passengers': 2, 'ticket_type': 'Unknown', 'pnr': u'4403341169', 'charting_status': 'CHART NOT PREPARED', 'train_number': '16236', 'to': 'MDU', 'boarding_date': datetime.datetime(2014, 12, 26, 0, 0), 'train_name': 'TUTICORIN EXP', 'class': '3A', 'passenger_status': [{'booking_status': 'W/L 28,GNWL', 'current_status': 'W/L 17'}, {'booking_status': 'W/L 29,GNWL', 'current_status': 'W/L 18'}]}
 
     def _map_passenger(passenger):
-	return {
-	   'seat_number': strip_tags(passenger['Booking Status ']).strip(),
-	   'status': strip_tags(passenger['* Current Status ']).strip()
-	}
-    passengers = [_map_passenger(resp[key]) for key in resp.keys() if key.isdigit()]
+        return {
+           'seat_number': passenger['current_status'],
+           'status': passenger['booking_status']
+        }
+    passengers = [_map_passenger(key) for key in resp['passenger_status']]
 
     ticket_is_cancelled = ticket_is_confirmed = chart_prepared_for_ticket = None
     will_get_notifications = True
@@ -75,7 +67,7 @@ def get_pnr_status(pnr_notify, delete_on_fail=True):
         ticket_is_confirmed = True
         will_get_notifications = False
         schedule_notification_now(pnr_notify)
-    if strip_tags(resp.get('Charting Status')).strip() == 'CHART PREPARED':
+    if resp['charting_status'] == 'CHART PREPARED':
         chart_prepared_for_ticket = True
         will_get_notifications = False
         schedule_notification_now(pnr_notify)

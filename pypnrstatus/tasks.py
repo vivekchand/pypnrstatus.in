@@ -32,7 +32,7 @@ def schedule_pnr_notification(pnr_notify):
         pnr_notify.delete()
         return
 
-    if data['chart_prepared']:
+    if pnr_status_dict['chart_prepared_for_ticket']:
         if notify_type == 'email':
             send_pnr_status_chart_prepared_email(passengers, pnr_notify)
         elif notify_type == 'phone':
