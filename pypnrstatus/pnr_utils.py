@@ -4,6 +4,8 @@ from requests.exceptions import ConnectionError
 from django.utils.html import strip_tags
 from pnrapi import pnrapi
 import datetime
+from pypnrstatus.exception_handler import log_exception
+
 
 def check_if_passengers_cnf(passengers):
     for passenger in passengers:
@@ -39,6 +41,7 @@ def schedule_notification_now(pnr_notify):
     pnr_notify.next_schedule_time = now + timedelta
     pnr_notify.save()
 
+@log_exception
 def get_pnr_status(pnr_notify, delete_on_fail=True):
     pnr_no = pnr_notify.pnr_no
     p = pnrapi.PnrApi(pnr_no)

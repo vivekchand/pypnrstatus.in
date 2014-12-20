@@ -7,6 +7,7 @@ from django.shortcuts import render
 from pypnrstatus.models import PNRNotification
 from pypnrstatus.pnr_utils import get_pnr_status, caluclate_timedelta
 from pypnrstatus.tasks import send_pnr_notification
+from exception_handler import log_exception
 import datetime
 
 def index(request):
