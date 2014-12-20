@@ -2,10 +2,11 @@ from django.conf import settings
 if not settings.configured:
     settings.configure()
 
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 from pypnrstatus.models import PNRNotification
 from pypnrstatus.pnr_utils import get_pnr_status, caluclate_timedelta
+from pypnrstatus.tasks import send_pnr_notification
 import datetime
 
 def index(request):
@@ -39,6 +40,7 @@ def pnr_status(request):
                 notification_frequency_value=notification_frequency_value, next_schedule_time=next_schedule_time )
 
         pnr_status = get_pnr_status(pnr_notify)
+        send_pnr_notification(pnr_notify=pnr_notify, pnr_status_dict=pnr_status)
         return render(request, 'pnr_status.html', pnr_status)
     else:
         return HttpResponseRedirect('/')

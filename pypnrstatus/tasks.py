@@ -3,16 +3,7 @@ import urllib2
 from pypnrstatus.pnr_utils import *
 import datetime
 
-def schedule_pnr_notification(pnr_notify):
-    pnr_status_dict = get_pnr_status(pnr_notify, delete_on_fail=False)
-
-    if pnr_status_dict.get('error'):
-       return
-
-    pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(pnr_notify.notification_frequency,
-                    pnr_notify.notification_frequency_value)
-    pnr_notify.save()
-
+def send_pnr_notification(pnr_notify, pnr_status_dict):
     passengers = pnr_status_dict['passengers']
     notify_type = pnr_notify.notification_type
 
@@ -45,3 +36,15 @@ def schedule_pnr_notification(pnr_notify):
     elif pnr_notify.notification_type == 'phone':
         send_pnr_status_sms(passengers, pnr_notify)
 
+
+def schedule_pnr_notification(pnr_notify):
+    pnr_status_dict = get_pnr_status(pnr_notify, delete_on_fail=False)
+
+    if pnr_status_dict.get('error'):
+       return
+
+    pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(pnr_notify.notification_frequency,
+                    pnr_notify.notification_frequency_value)
+    pnr_notify.save()
+
+    send_pnr_notification(pnr_notify=pnr_notify, pnr_status_dict=pnr_status_dict)
