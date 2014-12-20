@@ -115,7 +115,7 @@ def send_email(message, subject, to_addr):
 def send_sms(message, phone_no):
     print 'sending'
     import plivo
-    p = plivo.RestAPI('MAMDBMM2YYNTEXYMMWZJ', 'MjM2OWI2ZjA4YmE0ZjQzYzY4ZmFmY2RlNDJmZDlk')
+    p = plivo.RestAPI('MANJI0Y2YXODRMNZCZZW', 'NzEwNTQ2YTE4N2JhYzFkNGU1Yzg2ZjZlZjIyYzA0')
     plivo_number = '910123456789'
     if len(phone_no) == 10:
         phone_no = '91'+phone_no
