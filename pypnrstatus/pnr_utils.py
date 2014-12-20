@@ -7,7 +7,7 @@ import datetime
 
 def check_if_passengers_cnf(passengers):
     for passenger in passengers:
-        if passenger['status'] != 'CNF':
+        if passenger['seat_number'] != 'CNF':
             return False
     return True
 
@@ -15,7 +15,7 @@ def check_if_ticket_cancelled(passengers):
     cancel_count = 0
     total_count = len(passengers)
     for passenger in passengers:
-        if passenger['status'] == 'Can/Mod':
+        if passenger['seat_number'] == 'Can/Mod':
             cancel_count += 1
     if cancel_count == total_count:
         return True
@@ -62,15 +62,12 @@ def get_pnr_status(pnr_notify, delete_on_fail=True):
     if check_if_ticket_cancelled(passengers):
         ticket_is_cancelled = True
         will_get_notifications = False
-        schedule_notification_now(pnr_notify)
     if check_if_passengers_cnf(passengers):
         ticket_is_confirmed = True
         will_get_notifications = False
-        schedule_notification_now(pnr_notify)
     if resp['charting_status'] == 'CHART PREPARED':
         chart_prepared_for_ticket = True
         will_get_notifications = False
-        schedule_notification_now(pnr_notify)
 
     json_dict =  {'pnr_no': pnr_no,
                   'passengers': passengers,

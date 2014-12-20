@@ -6,8 +6,11 @@ import datetime
 def send_pnr_notification(pnr_notify, pnr_status_dict):
     passengers = pnr_status_dict['passengers']
     notify_type = pnr_notify.notification_type
+    pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(
+        pnr_notify.notification_frequency, pnr_notify.notification_frequency_value)
+    pnr_notify.save()
 
-    if check_if_ticket_cancelled(passengers):
+    if pnr_status_dict['ticket_is_cancelled']:
         if notify_type == 'email':
             send_ticket_cancelled_email(passengers, pnr_notify)
         elif notify_type == 'phone':
@@ -15,7 +18,7 @@ def send_pnr_notification(pnr_notify, pnr_status_dict):
         pnr_notify.delete()
         return
 
-    if check_if_passengers_cnf(passengers):
+    if pnr_status_dict['ticket_is_confirmed']:
         if notify_type == 'email':
             send_pnr_status_confirmed_email(passengers, pnr_notify)
         elif notify_type == 'phone':
@@ -42,9 +45,5 @@ def schedule_pnr_notification(pnr_notify):
 
     if pnr_status_dict.get('error'):
        return
-
-    pnr_notify.next_schedule_time = datetime.datetime.now() + caluclate_timedelta(pnr_notify.notification_frequency,
-                    pnr_notify.notification_frequency_value)
-    pnr_notify.save()
 
     send_pnr_notification(pnr_notify=pnr_notify, pnr_status_dict=pnr_status_dict)
