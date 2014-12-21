@@ -8,6 +8,7 @@ class PNRNotification(models.Model):
     notification_frequency = models.CharField(max_length=20) 
     notification_frequency_value = models.CharField(max_length=10)
     next_schedule_time = models.DateTimeField()
+    notify_on_status_change = models.BooleanField(default=False)
 
 class PNRStatus(models.Model):
     pnr_no = models.CharField(max_length=20)
