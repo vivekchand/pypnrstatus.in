@@ -41,7 +41,8 @@ def pnr_status(request):
                 notification_frequency_value=notification_frequency_value, next_schedule_time=next_schedule_time )
 
         pnr_status = get_pnr_status(pnr_notify)
-        send_pnr_notification(pnr_notify=pnr_notify, pnr_status_dict=pnr_status)
+        if not pnr_status.get('error'):
+            send_pnr_notification(pnr_notify=pnr_notify, pnr_status_dict=pnr_status)
         return render(request, 'pnr_status.html', pnr_status)
     else:
         return HttpResponseRedirect('/')

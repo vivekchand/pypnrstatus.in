@@ -108,7 +108,8 @@ def send_email(message, subject, to_addr):
         data={"from": "Py-PNR-Status <info@pypnrstatus.in>",
             "to": [to_addr],
             "subject": subject,
-            "html": message})
+            "html": message,
+            "text": message})
     print 'sent :)'
 
 
