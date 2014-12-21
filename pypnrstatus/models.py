@@ -1,4 +1,5 @@
 from django.db import models
+from jsonfield import JSONField
 
 class PNRNotification(models.Model):
     pnr_no = models.CharField(max_length=20)
@@ -7,3 +8,7 @@ class PNRNotification(models.Model):
     notification_frequency = models.CharField(max_length=20) 
     notification_frequency_value = models.CharField(max_length=10)
     next_schedule_time = models.DateTimeField()
+
+class PNRStatus(models.Model):
+    pnr_no = models.CharField(max_length=20)
+    status = JSONField()

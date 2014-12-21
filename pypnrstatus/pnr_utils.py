@@ -1,10 +1,10 @@
-import requests
-import json
-from requests.exceptions import ConnectionError
-from django.utils.html import strip_tags
-from pnrapi import pnrapi
 import datetime
+
+import requests
+
+from pnrapi import pnrapi
 from pypnrstatus.exception_handler import log_exception
+from pypnrstatus.models import PNRStatus
 
 
 def check_if_passengers_cnf(passengers):
@@ -76,6 +76,8 @@ def get_pnr_status(pnr_notify, delete_on_fail=True):
         chart_prepared_for_ticket = True
         will_get_notifications = False
 
+
+
     json_dict =  {'pnr_no': pnr_no,
                   'passengers': passengers,
                   'ticket_is_cancelled': ticket_is_cancelled,
@@ -83,6 +85,8 @@ def get_pnr_status(pnr_notify, delete_on_fail=True):
                   'chart_prepared_for_ticket': chart_prepared_for_ticket,
                   'will_get_notifications': will_get_notifications,
                   'pnr_notify': pnr_notify }
+
+    PNRStatus.objects.get_or_create(pnr_no=pnr_no, status=resp)
     return json_dict
 
 
