@@ -86,7 +86,9 @@ def get_pnr_status(pnr_notify, delete_on_fail=True):
                   'will_get_notifications': will_get_notifications,
                   'pnr_notify': pnr_notify }
 
-    PNRStatus.objects.get_or_create(pnr_no=pnr_no, status=resp)
+    pnr_status = PNRStatus.objects.get_or_create(pnr_no=pnr_no)
+    pnr_status.status = resp
+    pnr_status.save()
     return json_dict
 
 
