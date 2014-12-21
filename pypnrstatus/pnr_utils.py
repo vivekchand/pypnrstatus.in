@@ -48,9 +48,13 @@ def get_pnr_status(pnr_notify, delete_on_fail=True):
     if not p.request():
         if delete_on_fail:
             pnr_notify.delete()
-        return {'error': "We couldn't process your request for pnr no %s at this time!"% pnr_no}
+        send_email(
+            message=u'PNR: {} \n\n Error: {}'.format(pnr_no, p.error),
+            subject='Py-PNR-Status Error!',
+            to_addr='vivekchand19@gmail.com'
+        )
+        return {'error': p.error}
     resp = p.get_json()
-    # resp = {'reserved_upto': 'MDU', 'from': 'MAD', 'boarding_point': 'SBC', 'total_passengers': 2, 'ticket_type': 'Unknown', 'pnr': u'4403341169', 'charting_status': 'CHART NOT PREPARED', 'train_number': '16236', 'to': 'MDU', 'boarding_date': datetime.datetime(2014, 12, 26, 0, 0), 'train_name': 'TUTICORIN EXP', 'class': '3A', 'passenger_status': [{'booking_status': 'W/L 28,GNWL', 'current_status': 'W/L 17'}, {'booking_status': 'W/L 29,GNWL', 'current_status': 'W/L 18'}]}
 
     def _map_passenger(passenger):
         return {
